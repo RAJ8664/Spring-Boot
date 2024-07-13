@@ -1,5 +1,6 @@
 package roy.raj.jpa.and.hibernate.course.jdbc;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,8 @@ public class CourseJdbcRepository {
 	@Autowired
 	public JdbcTemplate springJdbcTemplate;
 
+
+	//solution to not write these queries -- > JPA
 	public static String INSERT_QUERY = 
 			"""	
 				insert into course(id, name , author, price)
