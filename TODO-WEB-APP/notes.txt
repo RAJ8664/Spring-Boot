@@ -1,0 +1,6 @@
+all the jsp files should be in the directory -- >
+/src/main/resources/META-INF/resources/resources/WEB-INF/jsp/{jsp file with extension}
+
+set the prefix and suffix in the application.properties
+prefix = /src/main/resources/META-INF/resources/WEB-INF/jsp/
+suff = .jsp
