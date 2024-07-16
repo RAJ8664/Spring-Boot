@@ -1,29 +1,33 @@
 package com.roy.raj.TODO.WEB.APP.Login;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
 public class LoginController {
 
-   private Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    @RequestMapping("/simple-login")
-    public String login() {
+    @RequestMapping(value = "login" , method = RequestMethod.GET)
+    public String GoToLogin() {
         return "login";
     }
 
-    //localhost:8080/login?name=RAJ
-    @RequestMapping("/login-with-param")
-    public String login(@RequestParam String name, ModelMap model) {
-        model.put("name", name);
-        logger.debug("current_name is {}" , name);
-        //mention ${name} in the login.jsp file
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String GoToWelcome(@RequestParam String name, @RequestParam String password, ModelMap model) {
+        model.put("name" , name);
+        model.put("password" , password);
+
+        if(authenticationService.authenticate(name, password)) {
+            return "welcome";
+        }
+        model.put("ErrorMessage" , "Invalid username or password");
         return "login";
     }
 

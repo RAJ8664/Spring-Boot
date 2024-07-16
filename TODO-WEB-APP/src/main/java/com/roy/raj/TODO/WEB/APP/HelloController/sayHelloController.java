@@ -13,7 +13,6 @@ public class sayHelloController {
         return "hello, what are you learning today ?";
     }
 
-
     //to display some html content to pages , use jsp (add the dependency first(tomcat embed jasper));
     @RequestMapping("/say-hello-jsp")
     public String sayHelloJsp() {
