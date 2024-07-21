@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthenticationService {
-
     public boolean authenticate(String username, String password) {
         if(username.equals("admin") && password.equals("admin")) {
             return true;
