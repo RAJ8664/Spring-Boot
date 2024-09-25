@@ -1,11 +1,15 @@
 package roy.raj.demo.practice.RESTAPI.SocialMediaRestAPI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
+
 import java.util.ArrayList;
 
 @RestController
@@ -25,9 +29,9 @@ public class UserController {
         return User_Service.FindUserById(UserId);
     } 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/users/delete/{UserId}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/users/{UserId}")
     public String DeleteUser(@PathVariable int UserId) {
-        if (User_Service.DeleteById(UserId) == UserId) {
+        if (User_Service.DeleteUserById(UserId) == UserId) {
             return "User Deleted SuccessFully";
         }
         return "No User Found";
@@ -36,10 +40,14 @@ public class UserController {
 
     //create a user and save it -- >> need to use post method;
     @RequestMapping(method = RequestMethod.POST , path = "/users")
-    public User saveUser(@RequestBody User user) {
+    public String saveUser(@Valid @RequestBody User user) {
         User_Service.SaveUser(user);
-        return user;
+        return "User Created SuccessFully";
     }
 
-    
+    @RequestMapping(method = RequestMethod.PUT, path = "/users/{id}/{name}")
+    public String updateNameDetails(@PathVariable int id, @PathVariable String name) {
+        User_Service.UpdateNameById(id, name);
+        return "Details updated SuccessFully !";
+    }
 }

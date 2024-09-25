@@ -2,9 +2,14 @@ package roy.raj.demo.practice.RESTAPI.SocialMediaRestAPI;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 public class User {
+    @Size(min = 2 , message = "UserName should have Minimum of 2 Characters")
     private String UserName;
     private int UserId;
+    @Past(message = "Birth Date should be a valid Date")
     private LocalDate UserBirthDate;
 
     public User() {}
@@ -42,5 +47,4 @@ public class User {
             ", UserBirthDate='" + getUserBirthDate().toString() + "'" +
             "}";
     }
-    
 }

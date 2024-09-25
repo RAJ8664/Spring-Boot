@@ -4,9 +4,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 //DAO -- > data access object;
+//we just implement business logic here;
+
 @Component
 public class UserDAOservice {
     
@@ -38,7 +39,7 @@ public class UserDAOservice {
         }
     }
 
-    public int DeleteById(int UserId) {
+    public int DeleteUserById(int UserId) {
         int n = users.size();
         for (int i = 0; i < n; i++) {
             if (users.get(i).getUserId() == UserId) {
@@ -47,6 +48,41 @@ public class UserDAOservice {
             }
         }
         return 0;
+    }
+
+    public String UpdateNameById(int UserId, String UserName) {
+        try {
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getUserId() == UserId) {
+                    User current_User = users.get(i);
+                    users.remove(i);
+                    current_User.setUserName(UserName);
+                    users.add(current_User);
+                    return "Details Updated SuccessFully";
+                }
+            }
+            throw new NoSuchFieldError("No Such User Found !");
+        } catch (Exception e) {
+            throw new NoSuchFieldError("No Such User Found !");
+        }
+    }
+
+
+    public String UpdateBirthDateById(int UserId, LocalDate UserBirthDate) {
+        try {
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getUserId() == UserId) {
+                    User current_User = users.get(i);
+                    users.remove(i);
+                    current_User.setUserBirthDate(UserBirthDate);
+                    users.add(current_User);
+                    return "Details Updated SuccessFully";
+                }
+            }
+            throw new NoSuchFieldError("No Such User Found !");
+        } catch (Exception e) {
+            throw new NoSuchFieldError("No Such User Found !");
+        }
     }
 
 }
