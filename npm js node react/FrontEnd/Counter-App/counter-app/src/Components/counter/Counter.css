@@ -1,20 +1,38 @@
 .counterButtonStyle {
-    font-size: 30px;
-    background-color: Green;
+    font-size: 16px;
+    background-color: orangered;
     color: white;
     width: 100px;
-    padding: 15px;
-    margin: 10px;
+    margin: 10px;  
+    padding: 15px; 
     border-radius: 40px;
     border-color: black;
+    border-width: 5px;
 }
 
 .count {
+    font-size: 150px;
+    padding: 20px;
+    color:green;
+}
+
+.totalcount {
+    height: 100px;
+    width: 100px;
     font-size: 50px;
-    background-color: white;
-    color: red;
+    color: blue;
+    margin: 200;
+    padding : 100px;
+}
+
+.ResetButton {
+    font-size: 16px;
+    background-color: green;
+    color: white;
     width: 100px;
     margin: 10px;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 40px;
+    border-color: black;
+    border-width: 5px;
 }
