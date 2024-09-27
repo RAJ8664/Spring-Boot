@@ -12,7 +12,20 @@ export default function Counter() {
             <div>
                 <button className = "counterButtonStyle" onClick = {IncrementCounter}
                 > +1 </button>
+                <button className = "counterButtonStyle" onClick = {IncrementCounter}> + 2</button>
             </div>
+            <div>
+                <button className = "counterButtonStyle"
+                    onClick = {IncrementCounter}
+                > +3
+                </button>
+                 <button className = "counterButtonStyle"
+                    onClick = {IncrementCounter}
+                > +4
+                </button>
+            </div>
+
+
         </div>
     )
 }

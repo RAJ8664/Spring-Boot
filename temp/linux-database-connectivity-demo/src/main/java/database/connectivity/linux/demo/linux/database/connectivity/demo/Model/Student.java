@@ -6,11 +6,11 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Student {
-    private String studentName;
-
     @Id
     @GeneratedValue
     private int studentId;
+    
+    private String studentName;
     private String studentBranch;
 
     public Student() {}
