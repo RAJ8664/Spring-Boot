@@ -19,7 +19,7 @@ public class ProfessorController {
     @Autowired
     private ProfessorJpaRepository repository;
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/professor")
+    @RequestMapping(method = RequestMethod.GET, path = "/professor")
     public ResponseEntity<?> getAllProfessors() {
         List<Professor> professors = repository.findAll();
         if (professors.size() > 0) {
@@ -27,7 +27,6 @@ public class ProfessorController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
     @RequestMapping(method = RequestMethod.POST, path = "/professor")
     public ResponseEntity<?> saveProfessor(@RequestBody Professor new_Professor) {
@@ -38,7 +37,19 @@ public class ProfessorController {
     @RequestMapping(method = RequestMethod.GET, path = "/professor/{professorID}")
     public ResponseEntity<?> getProfessorById(@PathVariable int professorID) {
         if (repository.existsById(professorID)) {
-            return new ResponseEntity<>(repository.findById(professorID) , HttpStatus.OK);
+            return new ResponseEntity<>(repository.findById(professorID), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/professor/{professorID}/name/{professorName}")
+    public ResponseEntity<?> changeProfessorNameById(@PathVariable int professorID, @PathVariable String professorName) {
+        if (repository.existsById(professorID)) {
+            Professor current_professor = repository.findById(professorID).get();
+            repository.deleteById(professorID);
+            current_professor.setProfessorName(professorName);
+            repository.save(current_professor);
+            return new ResponseEntity<>(current_professor, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

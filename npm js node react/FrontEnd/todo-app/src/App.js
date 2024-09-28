@@ -1,16 +1,12 @@
 import './App.css';
-import FirstComponent from './Components/ExampleComponents/FirstComponent'
-import SecondComponent from './Components/ExampleComponents/SecondComponent'
-import {ThirdComponent} from './Components/ExampleComponents/FirstComponent';
+import TodoApp from './Components/Todo/TodoApp';
 
 function App() {
-  return (
-    <div className="App">
-      <FirstComponent></FirstComponent>
-      <SecondComponent></SecondComponent>
-      <ThirdComponent></ThirdComponent>
-    </div>
-  );
+    return (
+        <div className="App">
+            <TodoApp />
+        </div>
+    );
 }
 
 export default App;
