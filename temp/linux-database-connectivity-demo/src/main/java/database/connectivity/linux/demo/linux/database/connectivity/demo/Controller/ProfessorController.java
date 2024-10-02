@@ -25,7 +25,7 @@ public class ProfessorController {
         if (professors.size() > 0) {
             return new ResponseEntity<>(professors, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);     
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/professor")
@@ -43,7 +43,7 @@ public class ProfessorController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/professor/{professorID}/name/{professorName}")
-    public ResponseEntity<?> changeProfessorNameById(@PathVariable int professorID, @PathVariable String professorName) {
+    public ResponseEntity<?> updateProfessorNameById(@PathVariable int professorID, @PathVariable String professorName) {
         if (repository.existsById(professorID)) {
             Professor current_professor = repository.findById(professorID).get();
             repository.deleteById(professorID);
@@ -53,4 +53,46 @@ public class ProfessorController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/professor/{professorId}/dept/{professorDept}")
+    public ResponseEntity<?> updateProfessorDepartmentById(@PathVariable int professorId, @PathVariable String professorDept) {
+        if (repository.existsById(professorId)) {
+            Professor current_professor = repository.findById(professorId).get();
+            repository.deleteById(professorId);
+            current_professor.setProfessorDept(professorDept);
+            repository.save(current_professor);
+            return new ResponseEntity<>(current_professor, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/professor/{professorId}/email/{professorEmail}")
+    public ResponseEntity<?> updateProfessorEmailById(@PathVariable int professorId, @PathVariable String professorEmail) {
+        if (repository.existsById(professorId)) {
+            Professor current_professor = repository.findById(professorId).get();
+            repository.deleteById(professorId);
+            current_professor.setProfessorEmail(professorEmail);
+            repository.save(current_professor);
+            return new ResponseEntity<>(current_professor, HttpStatus.OK);
+        }   
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/professor/{professorId}")
+    public ResponseEntity<?> deleteProfessorById(@PathVariable int professorId) {
+        if (repository.existsById(professorId)) {
+            repository.deleteById(professorId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    
+
+
+
+
+
+    
 }

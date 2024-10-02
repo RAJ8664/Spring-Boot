@@ -1,103 +1,31 @@
-import './TodoApp.css';
-import { useState } from 'react';
+import './TodoApp.css'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import HeaderComponent from "./HeaderComponent"
+import FooterComponent from "./FooterComponent"
+import ListTodoComponent from "./ListTodoComponent"
+import ErrorComponent from "./ErrorComponent"
+import LoginComponent from "./LoginComponent"
+import LogOutComponent from "./LogoutComponent"
+import WelcomeComponent from "./WelcomeComponent"
+import AuthProvider from "./security/AuthProvider"
 
 export default function TodoApp() {
     return (
         <div>
-            <LoginComponent> </LoginComponent>
-            {/* <WelcomeComponent></WelcomeComponent> */}
+            <AuthProvider>
+                <BrowserRouter>
+                    <HeaderComponent />
+                    <Routes>
+                        <Route path = "/" element = { <LoginComponent /> } />    
+                        <Route path = "/login" element = { <LoginComponent /> } />
+                        <Route path = "/welcome/:userName" element = { <WelcomeComponent /> } />
+                        <Route path = "/todos" element = { <ListTodoComponent /> } />
+                        <Route path = "/logout" element = { <LogOutComponent /> } />
+                        <Route path = "*" element = { <ErrorComponent /> } />
+                    </Routes>
+                    <FooterComponent />
+                </BrowserRouter>
+            </AuthProvider>
         </div>
     );
 }
-
-function LoginComponent() {
-    const [userName, setUserName] = useState('UserName');
-    const [password, setPassword] = useState('');
-    const [successValidation, setsuccessValidation] = useState(false);
-    const [errorValidation, setErrorValidation] = useState(false);
-
-    function handleUsernameChange(event) {
-        setUserName(event.target.value);
-    }
-
-    function handlePasswordChange(event) {
-        setPassword(event.target.value);
-    }
-
-    function CheckValidation() {
-        if (userName === 'RAJ ROY' && password === '12345') {
-            setsuccessValidation(true);
-            setErrorValidation(false);
-        } 
-        else {
-            setsuccessValidation(false);
-            setErrorValidation(true);
-        }
-    }
-
-    function CheckedValidationSuccess() {
-        if (successValidation) {
-            return (
-                <div className = "checkedValidation">
-                    Successfully logged in.
-                </div>
-            );
-        }
-        return null;
-    }
-
-    function CheckedValidationError() {
-        if (errorValidation) {
-            return (
-                <div className = "checkedValidation">
-                    Incorrect userName or Password check your credentials.
-                </div>
-            );
-        }
-        return null;
-    }
-
-    return (
-        <div className = "Login">
-            <CheckedValidationSuccess />
-            <CheckedValidationError />
-            <div className = "LoginForm">
-                <div>
-                    <label> userName </label>
-                    <input
-                        type = "text"
-                        name = "userName"
-                        value = {userName}
-                        onChange = {handleUsernameChange}
-                    ></input>
-                </div>
-                <div>
-                    <label> Password </label>
-                    <input
-                        type = "password"
-                        name = "Password"
-                        value = {password}
-                        onChange = {handlePasswordChange}
-                    ></input>
-                </div>
-                <div>
-                    <button type = "button" onClick = {CheckValidation}>
-                        Login
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-
-
-
-// function WelcomeComponent() {
-//   return (
-//     <div className = "Welcome">WelCome Component</div>
-//   );
-// }
-
-
-

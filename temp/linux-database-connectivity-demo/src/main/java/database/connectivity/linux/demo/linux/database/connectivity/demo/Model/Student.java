@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+
 @Entity
 public class Student {
     @Id
@@ -14,9 +15,9 @@ public class Student {
     private String studentBranch;
 
     public Student() {}
-    public Student(String studentName, int studentId, String studentBranch) {
-        this.studentName = studentName;
+    public Student(int studentId, String studentName, String studentBranch) {
         this.studentId = studentId;
+        this.studentName = studentName;
         this.studentBranch = studentBranch;
     }
 
@@ -52,7 +53,6 @@ public class Student {
             ", studentBranch='" + getStudentBranch() + "'" +
             "}";
     }
-    
 }
 
    
