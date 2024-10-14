@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from "./security/AuthProvider"
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './security/AuthProvider';
 function LoginComponent() {
-
     const [userName, setUserName] = useState('UserName');
     const [password, setPassword] = useState('');
     const [successValidation, setsuccessValidation] = useState(false);
@@ -10,49 +9,55 @@ function LoginComponent() {
     const navigate = useNavigate();
     const authContext = useAuth();
 
-
-    function handleUsernameChange(event) { setUserName(event.target.value); }
-    function handlePasswordChange(event) { setPassword(event.target.value); }
+    function handleUsernameChange(event) {
+        setUserName(event.target.value);
+    }
+    function handlePasswordChange(event) {
+        setPassword(event.target.value);
+    }
 
     function handleValidation() {
-        if (userName === 'RAJ ROY' && password === '12345') {
-            authContext.setAuthenticated(true);
+        if (authContext.login(userName, password)) {
             setsuccessValidation(true);
             setErrorValidation(false);
             navigate(`/welcome/${userName}`);
-        } 
-        else {
-            authContext.setAuthenticated(false);
+        } else {
             setsuccessValidation(false);
             setErrorValidation(true);
         }
     }
     return (
-        <div className = "Login">
+        <div className="Login">
             <h1> Login Please! </h1>
-            {successValidation  && <div> Successfully logged in. </div>}
-            {errorValidation && <div> Incorrect userName or Password please check your credentials. </div>}
-            <div className = "LoginForm">
+            {successValidation && <div> Successfully logged in. </div>}
+            {errorValidation && (
+                <div>
+                    {' '}
+                    Incorrect userName or Password please check your
+                    credentials.{' '}
+                </div>
+            )}
+            <div className="LoginForm">
                 <div>
                     <label> userName </label>
                     <input
-                        type = "text"
-                        name = "userName"
-                        value = {userName}
-                        onChange = {handleUsernameChange}
+                        type="text"
+                        name="userName"
+                        value={userName}
+                        onChange={handleUsernameChange}
                     ></input>
                 </div>
                 <div>
                     <label> Password </label>
                     <input
-                        type = "password"
-                        name = "Password"
-                        value = {password}
-                        onChange = {handlePasswordChange}
+                        type="password"
+                        name="Password"
+                        value={password}
+                        onChange={handlePasswordChange}
                     ></input>
                 </div>
                 <div>
-                    <button type = "button" onClick = {handleValidation}>
+                    <button type="button" onClick={handleValidation}>
                         Login
                     </button>
                 </div>

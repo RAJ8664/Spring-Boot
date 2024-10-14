@@ -7,10 +7,36 @@ input {
 }
 
 footer {
-    bottom : 0;
-    position : absolute;
-    width : 90%;
-    height : 40px;
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+    height: 40px;
 }
 
+.restbutton {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0.5%;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px #999;
+    transition: all 0.3s ease;
+}
 
+.restbutton:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px #666;
+    transform: translateY(-2px);
+}
+
+.restbutton:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
+}
