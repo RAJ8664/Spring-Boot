@@ -15,14 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import database.connectivity.linux.demo.linux.database.connectivity.demo.Model.Student;
 import database.connectivity.linux.demo.linux.database.connectivity.demo.Repository.StudentJpaRepository;
 
-
-/*
- *  how to link both the oprations performed by professors and students on admin; ?? 
- * 
- * 
-*/
-
-
 @RestController
 public class StudentController {
     

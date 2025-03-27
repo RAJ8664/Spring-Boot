@@ -1,0 +1,1 @@
+Simple project to show the database connectivity and crud operations that can be performed;
