@@ -32,7 +32,7 @@ public class Professor {
     public String getProfessorName() {
         return this.professorName;
     }
-
+    
     public void setProfessorName(String professorName) {
         this.professorName = professorName;
     }

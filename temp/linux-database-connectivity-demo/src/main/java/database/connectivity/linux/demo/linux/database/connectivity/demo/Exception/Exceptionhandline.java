@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Exceptionhandline extends RuntimeException {
-		public ResponseEntity<?> Professor_Exception_handling() {
-			
-			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-		}
+	public ResponseEntity<?> Professor_Exception_handling() {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	}
 }
