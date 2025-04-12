@@ -1,0 +1,6 @@
+filter_chain ----> front_controller(Dispatcher servlet) ----> controller;
+    filter_chain contains config for spring secutiry named UsernamePasswordAuthenticationfilter;
+
+SCRF ==> Cross Site Request Forgery
+        --> we need to send csrf token when we do post put delete call.
+        --> need to send key-value pair (X-CSRF-TOKEN, token value) in the header;
