@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpServletRequest;
 public class Studentcontroller {
     
     private List<Student> students = new ArrayList<>(List.of(
-        new Student("RAJ", "Computer Science"),
-        new Student("UNKNOWN", "Computer Science")
+        new Student(1, "RAJ", "Computer Science"),
+        new Student(2 , "UNKNOWN", "Computer Science")
     ));
 
     @GetMapping("/students")
@@ -30,12 +30,13 @@ public class Studentcontroller {
 
     @PostMapping("/students")
     public ResponseEntity<List<Student>> addStudent(@RequestBody Student newStudent) {
-        students.add(new Student(newStudent.getStudentName(), newStudent.getStudentMajor()));
+        students.add(new Student(newStudent.getStudentId(), newStudent.getStudentName(), newStudent.getStudentMajor()));
         return new ResponseEntity<>(students, HttpStatus.CREATED);
     }
 
     @GetMapping("/csrf-token")
     public ResponseEntity<CsrfToken> getTokenId(HttpServletRequest request) {
+        System.out.println(request.getAttribute("_csrf"));
         return new ResponseEntity<>((CsrfToken) request.getAttribute("_csrf"), HttpStatus.OK);
     }
 }

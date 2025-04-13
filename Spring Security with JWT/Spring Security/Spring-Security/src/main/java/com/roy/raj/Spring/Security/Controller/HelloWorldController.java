@@ -16,5 +16,4 @@ public class HelloWorldController {
         String greet = "Hello Programmer your session Id is : " + request.getSession().getId();;
         return new ResponseEntity<>(greet, HttpStatus.OK);
     }
-
 }
