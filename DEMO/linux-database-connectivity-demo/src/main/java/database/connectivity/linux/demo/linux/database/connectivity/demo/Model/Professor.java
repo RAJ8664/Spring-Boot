@@ -12,8 +12,10 @@ public class Professor {
     private String professorName;
     private String professorDept;
     private String professorEmail;
-    
-    public Professor() {}
+
+    public Professor() {
+    }
+
     public Professor(int professorID, String professorName, String professorDept, String professorEmail) {
         this.professorID = professorID;
         this.professorName = professorName;
@@ -32,7 +34,7 @@ public class Professor {
     public String getProfessorName() {
         return this.professorName;
     }
-    
+
     public void setProfessorName(String professorName) {
         this.professorName = professorName;
     }
@@ -56,10 +58,10 @@ public class Professor {
     @Override
     public String toString() {
         return "{" +
-            " professorID='" + getProfessorID() + "'" +
-            ", professorName='" + getProfessorName() + "'" +
-            ", professorDept='" + getProfessorDept() + "'" +
-            ", professorEmail='" + getProfessorEmail() + "'" +
-            "}";
+                " professorID='" + getProfessorID() + "'" +
+                ", professorName='" + getProfessorName() + "'" +
+                ", professorDept='" + getProfessorDept() + "'" +
+                ", professorEmail='" + getProfessorEmail() + "'" +
+                "}";
     }
 }
