@@ -2,6 +2,7 @@ package database.connectivity.linux.demo.linux.database.connectivity.demo.Contro
 
 import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,11 +18,11 @@ import database.connectivity.linux.demo.linux.database.connectivity.demo.Reposit
 
 @RestController
 public class StudentController {
-    
+
     @Autowired
     private StudentJpaRepository repository;
 
-    //Get all the Students;
+    /* Get all the Students */
     @RequestMapping(method = RequestMethod.GET, path = "/students")
     public ResponseEntity<?> getAllStudent() {
         List<Student> allStudents = repository.findAll();
@@ -31,14 +32,14 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //Add a Student;
+    /* Add a Student */
     @RequestMapping(method = RequestMethod.POST, path = "/student")
     public ResponseEntity<?> saveStudent(@RequestBody Student newStudent) {
         repository.save(newStudent);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //Fetch a Student with StudentId;
+    /* Fetch a Student with StudentId */
     @RequestMapping(method = RequestMethod.GET, path = "/student/{studentId}")
     public ResponseEntity<?> getStudentById(@PathVariable int studentId) {
         Optional<Student> current_student = repository.findById(studentId);
@@ -48,7 +49,20 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //Delete a Student with StudentId;
+    /* Get all the students based on studentName */
+    @RequestMapping(method = RequestMethod.PUT, path = "/student/all/{studentName}")
+    public ResponseEntity<?> getListOfStudentsByName(@PathVariable String studentName) {
+        List<Student> list_of_students = new ArrayList<>();
+        list_of_students = repository.findAll();
+        List<Student> result_students = new ArrayList<>();
+        for (Student current_student : list_of_students) {
+            if (current_student.getStudentName().equals(studentName))
+                result_students.add(current_student);
+        }
+        return new ResponseEntity<>(result_students, HttpStatus.OK);
+    }
+
+    /* Delete a Student with StudentId */
     @RequestMapping(method = RequestMethod.DELETE, path = "/student/{studentId}")
     public ResponseEntity<?> deleteStudentById(@PathVariable int studentId) {
         if (repository.existsById(studentId)) {
@@ -56,12 +70,12 @@ public class StudentController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    } 
+    }
 
-    //Update StudentBranch with StudentId;
+    /* Update StudentBranch with StudentId */
     @RequestMapping(method = RequestMethod.PUT, path = "/student/{studentID}/branch/{studentBranch}")
     public ResponseEntity<?> updateBranchById(@PathVariable int studentID, @PathVariable String studentBranch) {
-        if (repository.existsById(studentID))  {
+        if (repository.existsById(studentID)) {
             Student current_student = repository.findById(studentID).get();
             current_student.setStudentBranch(studentBranch);
             repository.deleteById(studentID);
@@ -71,7 +85,7 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //Update StudentName with StudentId;
+    /* Update StudentName with StudentId */
     @RequestMapping(method = RequestMethod.PUT, path = "/student/{studentID}/name/{studentName}")
     public ResponseEntity<?> updateNameById(@PathVariable int studentID, @PathVariable String studentName) {
         if (repository.existsById(studentID)) {

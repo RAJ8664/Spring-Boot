@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Exceptionhandline extends RuntimeException {
+public class Exceptionhandling extends RuntimeException {
 	public ResponseEntity<?> Professor_Exception_handling() {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}

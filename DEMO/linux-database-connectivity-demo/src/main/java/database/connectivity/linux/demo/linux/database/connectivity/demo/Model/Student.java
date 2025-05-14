@@ -2,17 +2,20 @@ package database.connectivity.linux.demo.linux.database.connectivity.demo.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Student {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
     private String studentName;
     private String studentBranch;
 
-    public Student() {}
+    public Student() {
+    }
+
     public Student(int studentId, String studentName, String studentBranch) {
         this.studentId = studentId;
         this.studentName = studentName;
@@ -46,11 +49,9 @@ public class Student {
     @Override
     public String toString() {
         return "{" +
-            " studentName='" + getStudentName() + "'" +
-            ", studentId='" + getStudentId() + "'" +
-            ", studentBranch='" + getStudentBranch() + "'" +
-            "}";
+                " studentName='" + getStudentName() + "'" +
+                ", studentId='" + getStudentId() + "'" +
+                ", studentBranch='" + getStudentBranch() + "'" +
+                "}";
     }
 }
-
-   
