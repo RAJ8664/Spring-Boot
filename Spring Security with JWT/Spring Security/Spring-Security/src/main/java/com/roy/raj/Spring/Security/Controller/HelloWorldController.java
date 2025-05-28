@@ -10,10 +10,11 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class HelloWorldController {
- 
-    @RequestMapping(method = RequestMethod.GET, path = "/hello")
-    public ResponseEntity<String> helloWorld(HttpServletRequest request) {
-        String greet = "Hello Programmer your session Id is : " + request.getSession().getId();;
+    
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public ResponseEntity<String> helloWorld1(HttpServletRequest request) {
+        String greet = "Hello Programmer your session Id is : " + request.getSession().getId();
         return new ResponseEntity<>(greet, HttpStatus.OK);
     }
+    
 }

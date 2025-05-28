@@ -3,9 +3,11 @@ package com.roy.raj.Spring.Security.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,22 +27,27 @@ public class SecurityConfig {
         http.csrf(customizer -> customizer.disable());
 
         /* now i want to have my own authentication to my application */
-        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
+        /* It does not makes senset to have authentication for registration and login ---> let user use the application for registration and login hence commenting the below line. */ 
+        /* http.authorizeHttpRequests(request -> request.anyRequest().authenticated()); */
+
+        /* Other than loging and register, it will authenticate the user first */
+        http.authorizeHttpRequests(request -> request.requestMatchers("login", "register").permitAll().anyRequest().authenticated());
 
         /* enable form login */
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults()); /* For the purpose of testing it on api tesing softwares (postman) */
+        http.sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS));
 
         /* finally its going to build the filter chain */
         return http.build();
     }
 
-/*  We want to have our own username and password, not the one provided in applications.properties
-    we don't want to have hard coded username and password
+    /*  We want to have our own username and password, not the one provided in applications.properties
+        we don't want to have hard coded username and password
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user1 = User
-                                .withDefaultPasswordEncoder()  /* Don't use it in production only for demo purpose* /
+                                .withDefaultPasswordEncoder()  /* Not Recommended * /
                                 .username("root")
                                 .password("root")
                                 .roles("USER")
@@ -53,20 +60,19 @@ public class SecurityConfig {
                                 .build();
         return new InMemoryUserDetailsManager(user1, user2);
     } 
-*/
-
+    */
+   
     /* I want to have my own way of checking the user credentials whether it is correct or not, and will also store the user credentials in the database (mysql)
-    or now I have insert two users in the database manually for testing purpose 
-    Basically we are chaing here the Authentication provider, and providing our own implementation on how it needs to be authenticated */
+       for now I have insert two users in the database manually for testing purpose 
+       Basically we are chaing here the Authentication provider, and providing our own implementation on how it needs to be authenticated */
     @Bean
     public AuthenticationProvider authenticationProvider() {
-
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
         /* For now I am not using any password encoder, Just storing the password as text */
         /* provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance()); */
 
-        /* Here we specify that hey, i am using strength 4 bcrypt password encoder, please validate accordingly*/
+        /* Here we specify that hey, i am using strength 4 bcrypt password encoder, please validate accordingly */
         provider.setPasswordEncoder(new BCryptPasswordEncoder(4));
         
         /* I also want to have my own userdetails service */
@@ -82,9 +88,13 @@ public class SecurityConfig {
 
         check the implementation of it in class UserController and UserService, how we acturally hash the plain text password;
     */
+    /* Implementation part for JWT(Jason Web Token) AuthenticationManager */
 
+    @Bean
+    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
+       return config.getAuthenticationManager(); 
+    }
 
-    /* Implementation part for JWT AuthenticationManager */
 
 
 }

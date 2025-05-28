@@ -3,6 +3,9 @@ package com.roy.raj.Spring.Security.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private AuthenticationManager authManager;
 
     /* Strength here mean for how many round the algo with hash the password (algo(plaintext) --> hash1 --> algo(hash1) --> hash2    --> algo(hash2) --> hash3 ......)*/
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
@@ -32,5 +38,16 @@ public class UserService {
     public List<User> getAllUser() {
         return repository.findAll();
     }
+
+    /* user service to verify the user */
+    public String verify(User user) {
+        Authentication auth = authManager.authenticate(
+            new UsernamePasswordAuthenticationToken(user.getUserName(), user.getUserPassword()));
+        if (auth.isAuthenticated()) {
+            return "User is authenticated";
+        } else {
+            return "User is not authenticated";
+        }
+    }  
     
 }

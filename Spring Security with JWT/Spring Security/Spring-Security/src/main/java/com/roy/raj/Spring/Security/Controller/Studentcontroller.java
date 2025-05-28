@@ -34,6 +34,7 @@ public class Studentcontroller {
         return new ResponseEntity<>(students, HttpStatus.CREATED);
     }
 
+    /* CSRF --> Cross-Site Request Forgery */
     @GetMapping("/csrf-token")
     public ResponseEntity<CsrfToken> getTokenId(HttpServletRequest request) {
         System.out.println(request.getAttribute("_csrf"));
