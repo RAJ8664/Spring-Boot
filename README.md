@@ -6,29 +6,6 @@
 
 ---
 
-## 📚 Table of Contents
-
-1. [Introduction to Spring Framework](#introduction-to-spring-framework)
-2. [Core Spring Concepts](#core-spring-concepts)
-3. [Inversion of Control (IoC)](#inversion-of-control-ioc)
-4. [Dependency Injection (DI)](#dependency-injection-di)
-5. [Spring IoC Container](#spring-ioc-container)
-6. [Bean Management](#bean-management)
-7. [Aspect-Oriented Programming (AOP)](#aspect-oriented-programming-aop)
-8. [Spring MVC](#spring-mvc)
-9. [Data Access Layer](#data-access-layer)
-10. [Transaction Management](#transaction-management)
-11. [Spring Boot](#spring-boot)
-12. [Spring Boot Auto-Configuration](#spring-boot-auto-configuration)
-13. [Spring Boot Starters](#spring-boot-starters)
-14. [Spring Boot Actuator](#spring-boot-actuator)
-15. [Profiles and Configuration](#profiles-and-configuration)
-16. [Security](#security)
-17. [Testing](#testing)
-18. [Advanced Topics](#advanced-topics)
-
----
-
 ## 🚀 Introduction to Spring Framework
 
 ### What is Spring Framework?
@@ -4438,29 +4415,3 @@ public class TestDataBuilder {
 - [Spring Framework Reference](https://docs.spring.io/spring-framework/docs/current/reference/html/)
 - [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/html/)
 - [Spring Security Reference](https://docs.spring.io/spring-security/reference/)
-
-### Learning Path
-
-1. Master Core Spring concepts (IoC, DI, AOP)
-2. Learn Spring MVC for web development
-3. Understand Spring Data for data access
-4. Explore Spring Boot for rapid development
-5. Study Spring Security for application security
-6. Practice with real-world projects
-
-### Common Interview Topics
-
-- Spring vs Spring Boot differences
-- Dependency Injection types and best practices
-- Bean lifecycle and scopes
-- AOP concepts and implementations
-- Spring MVC request flow
-- Transaction management
-- Spring Security configuration
-- Spring Boot auto-configuration
-- Testing strategies
-- Performance optimization techniques
-
----
-
-_This comprehensive guide covers all essential aspects of Core Spring and Spring Boot. Use it as a reference for development, interviews, and continuous learning. Keep practicing with hands-on projects to master these concepts!_
