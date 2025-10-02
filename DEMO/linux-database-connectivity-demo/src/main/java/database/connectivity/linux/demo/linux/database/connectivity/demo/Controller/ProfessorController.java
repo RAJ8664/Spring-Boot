@@ -16,7 +16,7 @@ import database.connectivity.linux.demo.linux.database.connectivity.demo.Reposit
 
 @RestController
 public class ProfessorController {
-    
+
     @Autowired
     private ProfessorJpaRepository repository;
 
@@ -24,10 +24,9 @@ public class ProfessorController {
     @RequestMapping(method = RequestMethod.GET, path = "/professors")
     public ResponseEntity<?> getAllProfessors() {
         List<Professor> professors = repository.findAll();
-        if (!professors.isEmpty()) {
+        if (!professors.isEmpty())
             return new ResponseEntity<>(professors, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);     
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     //Add a Professor;
@@ -40,9 +39,8 @@ public class ProfessorController {
     //Fetch a Professor using ProfessorId;
     @RequestMapping(method = RequestMethod.GET, path = "/professor/{professorID}")
     public ResponseEntity<?> getProfessorById(@PathVariable int professorID) {
-        if (repository.existsById(professorID)) {
+        if (repository.existsById(professorID))
             return new ResponseEntity<>(repository.findById(professorID), HttpStatus.OK);
-        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -91,7 +89,7 @@ public class ProfessorController {
             current_professor.setProfessorEmail(professorEmail);
             repository.save(current_professor);
             return new ResponseEntity<>(current_professor, HttpStatus.OK);
-        }   
+        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

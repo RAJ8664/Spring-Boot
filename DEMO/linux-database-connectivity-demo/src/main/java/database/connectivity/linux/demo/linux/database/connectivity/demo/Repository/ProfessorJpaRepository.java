@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import database.connectivity.linux.demo.linux.database.connectivity.demo.Model.Professor;
 
 @Repository
-public interface ProfessorJpaRepository extends JpaRepository<Professor, Integer>{
-    
+public interface ProfessorJpaRepository extends JpaRepository<Professor, Integer> {
+
 }

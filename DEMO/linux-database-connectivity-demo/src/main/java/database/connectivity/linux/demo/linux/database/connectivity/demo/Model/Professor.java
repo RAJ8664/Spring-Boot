@@ -58,10 +58,10 @@ public class Professor {
     @Override
     public String toString() {
         return "{" +
-                " professorID='" + getProfessorID() + "'" +
-                ", professorName='" + getProfessorName() + "'" +
-                ", professorDept='" + getProfessorDept() + "'" +
-                ", professorEmail='" + getProfessorEmail() + "'" +
-                "}";
+               " professorID='" + getProfessorID() + "'" +
+               ", professorName='" + getProfessorName() + "'" +
+               ", professorDept='" + getProfessorDept() + "'" +
+               ", professorEmail='" + getProfessorEmail() + "'" +
+               "}";
     }
 }

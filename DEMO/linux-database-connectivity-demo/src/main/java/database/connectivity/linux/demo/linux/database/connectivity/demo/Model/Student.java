@@ -49,9 +49,9 @@ public class Student {
     @Override
     public String toString() {
         return "{" +
-                " studentName='" + getStudentName() + "'" +
-                ", studentId='" + getStudentId() + "'" +
-                ", studentBranch='" + getStudentBranch() + "'" +
-                "}";
+               " studentName='" + getStudentName() + "'" +
+               ", studentId='" + getStudentId() + "'" +
+               ", studentBranch='" + getStudentBranch() + "'" +
+               "}";
     }
 }

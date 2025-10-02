@@ -26,9 +26,8 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.GET, path = "/students")
     public ResponseEntity<?> getAllStudent() {
         List<Student> allStudents = repository.findAll();
-        if (!allStudents.isEmpty()) {
+        if (!allStudents.isEmpty())
             return new ResponseEntity<>(allStudents, HttpStatus.OK);
-        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -43,9 +42,8 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.GET, path = "/student/{studentId}")
     public ResponseEntity<?> getStudentById(@PathVariable int studentId) {
         Optional<Student> current_student = repository.findById(studentId);
-        if (current_student.isPresent()) {
+        if (current_student.isPresent())
             return new ResponseEntity<>(current_student.get(), HttpStatus.OK);
-        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

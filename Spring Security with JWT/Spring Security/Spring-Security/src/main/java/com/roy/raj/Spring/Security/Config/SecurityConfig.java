@@ -20,14 +20,14 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsService myUserDetailsService;
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         /* disable csrf (now you cannot have get request with localhost:8080/csrf-token --> since we are disabling it here.) */
         http.csrf(customizer -> customizer.disable());
 
         /* now i want to have my own authentication to my application */
-        /* It does not makes senset to have authentication for registration and login ---> let user use the application for registration and login hence commenting the below line. */ 
+        /* It does not makes senset to have authentication for registration and login ---> let user use the application for registration and login hence commenting the below line. */
         /* http.authorizeHttpRequests(request -> request.anyRequest().authenticated()); */
 
         /* Other than loging and register, it will authenticate the user first */
@@ -44,8 +44,8 @@ public class SecurityConfig {
 
     /*  We want to have our own username and password, not the one provided in applications.properties
         we don't want to have hard coded username and password
-    @Bean
-    public UserDetailsService userDetailsService() {
+        @Bean
+        public UserDetailsService userDetailsService() {
         UserDetails user1 = User
                                 .withDefaultPasswordEncoder()  /* Not Recommended * /
                                 .username("root")
@@ -59,12 +59,12 @@ public class SecurityConfig {
                                 .roles("ADMIN")
                                 .build();
         return new InMemoryUserDetailsManager(user1, user2);
-    } 
+        }
     */
-   
-    /* I want to have my own way of checking the user credentials whether it is correct or not, and will also store the user credentials in the database (mysql)
-       for now I have insert two users in the database manually for testing purpose 
-       Basically we are chaing here the Authentication provider, and providing our own implementation on how it needs to be authenticated */
+
+    /*  I want to have my own way of checking the user credentials whether it is correct or not, and will also store the user credentials in the database (mysql)
+        for now I have insert two users in the database manually for testing purpose
+        Basically we are chaing here the Authentication provider, and providing our own implementation on how it needs to be authenticated */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -74,17 +74,17 @@ public class SecurityConfig {
 
         /* Here we specify that hey, i am using strength 4 bcrypt password encoder, please validate accordingly */
         provider.setPasswordEncoder(new BCryptPasswordEncoder(4));
-        
+
         /* I also want to have my own userdetails service */
         provider.setUserDetailsService(myUserDetailsService);
-        
+
         return provider;
     }
 
     /* Now is the interesting part, how we actually incrypt the password ? */
-    /* 
+    /*
         we want something where user submit the form with username and password and before saving in into the database we want to encrypt the password
-        and then store it in database; we use bcrypt for this. (basically some encryption algorithm running at k times); 
+        and then store it in database; we use bcrypt for this. (basically some encryption algorithm running at k times);
 
         check the implementation of it in class UserController and UserService, how we acturally hash the plain text password;
     */
@@ -92,9 +92,6 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
-       return config.getAuthenticationManager(); 
+        return config.getAuthenticationManager();
     }
-
-
-
 }
